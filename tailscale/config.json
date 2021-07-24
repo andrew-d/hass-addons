@@ -1,0 +1,28 @@
+{
+    "name": "Tailscale",
+    "version": "1.8.3.0",
+    "slug": "tailscale",
+    "description": "A zero config VPN",
+    "url": "https://github.com/tsujamin/hass-addons/tree/main/tailscale",
+    "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+    "startup": "application",
+    "boot": "auto",
+    "host_network": true,
+    "privileged": [
+        "NET_ADMIN"
+    ],
+    "devices": [
+        "/dev/net/tun"
+    ],
+    "options": {
+        "hostname": "homeassistant"
+    },
+    "schema": {
+        "advertise_routes": "str?",
+        "advertise_exit_node": "bool?",
+        "auth_key": "str",
+        "port": "int(0,65535)?",
+        "hostname": "str?",
+        "force_reauth": "bool?"
+    }
+}
