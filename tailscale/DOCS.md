@@ -6,7 +6,7 @@ Follow these steps to get the add-on installed on your system:
 
 1. Navigate in your Home Assistant frontend to **Supervisor** -> **Add-on Store**.
 2. Click the "dot dot dot" icon in the top right corner, followed by the **Repositories** button.
-3. Enter `https://github.com/tsujamin/hass-addons.git` as the new repository and click Add.
+3. Enter `https://github.com/andrew-d/hass-addons.git` as the new repository and click Add.
 4. Click the "dot dot dot" icon in the top right corner again, and click the **Reload** button
 5. Wait for the page to finish reloading, find the "Tailscale" add-on and click it. 
 6. Click on the "INSTALL" button.
@@ -110,6 +110,18 @@ If enabled, you will then need to visit Tailscale to complete the setup:
 Note: Tailscale may say "This machine has IP forwarding disabled and cannot relay traffic" - currently this appears to be inaccurate and you are still able to use your Home Assistant as an exit node.
 
 See <https://tailscale.com/kb/1103/exit-nodes> for more information.
+
+### Option: `exit_node`
+
+This option (if set) configures tailscale to route all non-Tailscale internet traffic through the specified tailscale peer IP. 
+
+If enabled, you will need to have preconfigured the specified IP as an exit node, see the [Official Guide](https://tailscale.com/kb/1103/exit-nodes/#:~:text=in%20the%20future.-,Step%201%3A%20Advertise%20a%20device%20as%20an%20exit%20node,-From%20the%20device) for more information.
+
+### Option: `accept_routes`
+
+This option (if set) configures tailscale to enable connectivity to 100.X style Tailscale IP addresses.
+
+See [Subnets](https://tailscale.com/kb/1019/subnets/#step-5-use-your-subnet-routes-from-other-machines) for more information.
 
 ## How to connect your Home Assistant App (iOS)
 
