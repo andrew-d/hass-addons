@@ -77,6 +77,15 @@ check_repository() {
         (cd "$prefix/" && patch -p0 < "$patch" && git add .)
     done
 
+    # Update the JSON file
+    jq \
+        --arg name "$name" \
+        --arg ref "$ref" \
+        '.[$name].ref = $ref' \
+        < upstreams.json > upstreams.json.new
+    mv upstreams.json.new upstreams.json
+    git add upstreams.json
+
     # Commit if there's any changes
     if [[ -n "$(git status --porcelain)" ]]; then
         git commit -q -m "$name: updated prefix '$prefix/' to $ref"
