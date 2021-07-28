@@ -26,14 +26,14 @@ jobs:
           ./update.sh
           git diff
 
-      #- name: Create Pull Request
-      #  if: ${{ success() }}
-      #  uses: peter-evans/create-pull-request@v3
-      #  with:
-      #    token: ${{secrets.GH_REPO_TOKEN}}
-      #    assignees: andrew-d
-      #    delete-branch: true
-      #    branch: auto-version-bump/bump
-      #    branch-suffix: timestamp
-      #    base: main
-      #    title: "Bump versions"
+      - name: Create Pull Request
+        if: ${{ fromJSON(steps.check.outputs.update_available) }}
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{secrets.GH_REPO_TOKEN}}
+          assignees: andrew-d
+          delete-branch: true
+          branch: auto-version-bump/bump
+          branch-suffix: timestamp
+          base: main
+          title: "Bump Versions"
