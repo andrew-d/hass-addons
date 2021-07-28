@@ -1,0 +1,32 @@
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 5 * * *'
+
+jobs:
+  check-update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Check For Updates
+        run: |
+          ./check-update.sh
+
+      - name: Perform Updates
+        if: ${{ success() }}
+        run: |
+          ./update.sh
+          git diff
+
+      #- name: Create Pull Request
+      #  if: ${{ success() }}
+      #  uses: peter-evans/create-pull-request@v3
+      #  with:
+      #    token: ${{secrets.GH_REPO_TOKEN}}
+      #    assignees: andrew-d
+      #    delete-branch: true
+      #    branch: auto-version-bump/bump
+      #    branch-suffix: timestamp
+      #    base: main
+      #    title: "Bump versions"
