@@ -1,3 +1,5 @@
+name: "Automatically check for updates and open a PR"
+
 on:
   workflow_dispatch:
   schedule:
@@ -10,11 +12,16 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Check For Updates
+        id: check
         run: |
-          ./check-update.sh
+          if ./check-update.sh; then
+            echo "::set-output name=update_available::${{ toJSON(true) }}"
+          else
+            echo "::set-output name=update_available::${{ toJSON(false) }}"
+          fi
 
       - name: Perform Updates
-        if: ${{ success() }}
+        if: ${{ fromJSON(steps.check.outputs.update_available) }}
         run: |
           ./update.sh
           git diff
