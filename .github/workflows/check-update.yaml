@@ -14,7 +14,7 @@ jobs:
       - name: Check For Updates
         id: check
         run: |
-          if ./check-update.sh; then
+          if ./check-update.sh --update-lockfile; then
             echo "::set-output name=update_available::${{ toJSON(true) }}"
           else
             echo "::set-output name=update_available::${{ toJSON(false) }}"
