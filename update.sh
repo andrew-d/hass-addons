@@ -80,6 +80,7 @@ check_repository() {
 
     # Update the JSON file
     jq \
+        --indent 4 \
         --arg name "$name" \
         --arg ref "$ref" \
         '.[$name].ref = $ref' \
