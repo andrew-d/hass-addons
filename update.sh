@@ -74,7 +74,14 @@ check_repository() {
     local patch
     for patch in "$@"; do
         patch="$(realpath "$patch")"
-        (cd "$prefix/" && patch -p0 < "$patch" && git add .)
+        (
+            cd "$prefix/" \
+            && patch \
+                --no-backup-if-mismatch \
+                -p0 \
+                < "$patch" \
+            && git add .
+        )
     done
     git add "$prefix/"
 
