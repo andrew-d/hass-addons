@@ -11,6 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Setup git
+        run: |
+          git config user.email "andrew@du.nham.ca"
+          git config user.name "Andrew Dunham"
+
       - name: Check For Updates
         id: check
         run: |
@@ -23,8 +28,6 @@ jobs:
       - name: Perform Updates
         if: ${{ fromJSON(steps.check.outputs.update_available) }}
         run: |
-          git config user.email "andrew@du.nham.ca"
-          git config user.name "Andrew Dunham"
           ./update.sh
           
           printf "\nCommits:\n"
