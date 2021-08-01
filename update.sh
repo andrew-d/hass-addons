@@ -74,17 +74,16 @@ check_repository() {
     local patch
     for patch in "$@"; do
         patch="$(realpath "$patch")"
-        (cd "$prefix/" && patch -p0 < "$patch" && git add .)
+        (
+            cd "$prefix/" \
+            && patch \
+                --no-backup-if-mismatch \
+                -p0 \
+                < "$patch" \
+            && git add .
+        )
     done
-
-    # Update the JSON file
-    jq \
-        --arg name "$name" \
-        --arg ref "$ref" \
-        '.[$name].ref = $ref' \
-        < upstreams.json > upstreams.json.new
-    mv upstreams.json.new upstreams.json
-    git add upstreams.json
+    git add "$prefix/"
 
     # Commit if there's any changes
     if [[ -n "$(git status --porcelain)" ]]; then

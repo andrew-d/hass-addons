@@ -11,10 +11,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Setup git
+        run: |
+          git config user.email "andrew@du.nham.ca"
+          git config user.name "Andrew Dunham"
+
       - name: Check For Updates
         id: check
         run: |
-          if ./check-update.sh; then
+          if ./check-update.sh --update-lockfile; then
             echo "::set-output name=update_available::${{ toJSON(true) }}"
           else
             echo "::set-output name=update_available::${{ toJSON(false) }}"
@@ -23,10 +28,12 @@ jobs:
       - name: Perform Updates
         if: ${{ fromJSON(steps.check.outputs.update_available) }}
         run: |
-          git config user.email "andrew@du.nham.ca"
-          git config user.name "Andrew Dunham"
           ./update.sh
-          git diff
+          
+          printf "\nCommits:\n"
+          git log --oneline $(git merge-base --fork-point main)..HEAD
+          printf "\nDiff:\n"
+          git diff $(git merge-base --fork-point main)
 
       - name: Create Pull Request
         if: ${{ fromJSON(steps.check.outputs.update_available) }}

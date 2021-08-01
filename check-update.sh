@@ -7,7 +7,8 @@ check_repository() {
     local repository="$2"
     local ref="$3"
     local branch="$4"
-    shift 4
+    local update_lockfile="$5"
+    shift 5
 
     local tdir
     tdir="$(mktemp -d)"
@@ -22,16 +23,33 @@ check_repository() {
     local latest
     latest="$(git -C "$tdir/repo" ls-remote check "refs/heads/$branch" | awk '{ print $1 }')"
 
-    if [[ "$latest" != "$ref" ]]; then
-        echo "  UPDATE: $ref -> $latest" >&2
-        return 0
-    else
+    if [[ "$latest" = "$ref" ]]; then
         echo "  OK: $ref" >&2
         return 1
     fi
+
+    echo "  UPDATE: $ref -> $latest" >&2
+    if [[ "$update_lockfile" = "y" ]]; then
+        jq \
+            --indent 4 \
+            --arg name "$name" \
+            --arg ref "$latest" \
+            '.[$name].ref = $ref' \
+            < upstreams.json > upstreams.json.new
+        mv upstreams.json.new upstreams.json
+    fi
+
+    return 0
 }
 
 main() {
+    local update_lockfile
+    if [[ "${1:-}" = "--update-lockfile" ]]; then
+        update_lockfile=y
+    else
+        update_lockfile=n
+    fi
+
     local updatable=()
 
     while read -r upstream; do
@@ -43,12 +61,16 @@ main() {
 
         echo "Checking: $repository" >&2
 
-        if check_repository "$name" "$repository" "$ref" "$branch"; then
+        if check_repository "$name" "$repository" "$ref" "$branch" "$update_lockfile"; then
             updatable+=("$name")
         fi
     done < <(jq -c '. | to_entries | .[]' upstreams.json)
 
     if [[ "${#updatable[@]}" -gt 0 ]]; then
+        if [[ "$update_lockfile" = "y" ]]; then
+            git add upstreams.json
+            git commit -q -m "upstreams: update ${#updatable[@]} upstreams to latest version"
+        fi
         exit 0
     else
         exit 1
