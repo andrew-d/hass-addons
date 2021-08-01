@@ -26,7 +26,7 @@ jobs:
           git config user.email "andrew@du.nham.ca"
           git config user.name "Andrew Dunham"
           ./update.sh
-          git diff
+          git diff $(git merge-base --fork-point main)
 
       - name: Create Pull Request
         if: ${{ fromJSON(steps.check.outputs.update_available) }}
