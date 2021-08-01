@@ -76,6 +76,7 @@ check_repository() {
         patch="$(realpath "$patch")"
         (cd "$prefix/" && patch -p0 < "$patch" && git add .)
     done
+    git add "$prefix/"
 
     # Update the JSON file
     jq \
