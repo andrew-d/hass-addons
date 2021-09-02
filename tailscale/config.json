@@ -1,11 +1,11 @@
 {
     "name": "Tailscale",
-    "version": "1.14.0.2",
+    "version": "1.14.0.2.1",
     "slug": "tailscale",
     "description": "A zero config VPN",
     "url": "https://github.com/andrew-d/hass-addons/tree/main/tailscale",
     "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
-    "startup": "application",
+    "startup": "services",
     "boot": "auto",
     "host_network": true,
     "privileged": [
