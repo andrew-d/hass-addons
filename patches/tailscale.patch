@@ -1,7 +1,7 @@
-diff --git tailscale/DOCS.md tailscale/DOCS.md
+diff --git DOCS.md DOCS.md
 index 3fba9f7..6160775 100644
---- tailscale/DOCS.md
-+++ tailscale/DOCS.md
+--- DOCS.md
++++ DOCS.md
 @@ -6,7 +6,7 @@ Follow these steps to get the add-on installed on your system:
  
  1. Navigate in your Home Assistant frontend to **Supervisor** -> **Add-on Store**.
@@ -11,10 +11,10 @@ index 3fba9f7..6160775 100644
  4. Click the "dot dot dot" icon in the top right corner again, and click the **Reload** button
  5. Wait for the page to finish reloading, find the "Tailscale" add-on and click it. 
  6. Click on the "INSTALL" button.
-diff --git tailscale/config.json tailscale/config.json
+diff --git config.json config.json
 index 5555362..8e3163f 100644
---- tailscale/config.json
-+++ tailscale/config.json
+--- config.json
++++ config.json
 @@ -3,9 +3,9 @@
      "version": "1.14.0.2",
      "slug": "tailscale",
