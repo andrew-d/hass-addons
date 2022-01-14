@@ -1,6 +1,6 @@
 {
     "name": "Tailscale",
-    "version": "1.18.1.1",
+    "version": "1.20.0.0",
     "slug": "tailscale",
     "description": "A zero config VPN",
     "url": "https://github.com/andrew-d/hass-addons/tree/main/tailscale",
@@ -17,6 +17,9 @@
     "options": {
         "hostname": "homeassistant"
     },
+    "map": [
+        "ssl:rw"
+    ],
     "schema": {
         "advertise_routes": "str?",
         "advertise_exit_node": "bool?",
@@ -27,6 +30,7 @@
         "force_reauth": "bool?",
         "accept_routes": "bool?",
         "userspace_networking": "bool?",
-        "tags": "str?"
+        "tags": "str?",
+        "cert_domain": "str?"
     }
 }
