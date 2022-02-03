@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.20.2.0
+- Tailscale package updated to version `1.20.2`
+
+## 1.20.1.0
+- Tailscale package updated to version `1.20.1`
+
+## 1.20.0.0
+- Tailscale package updated to version `1.20.0`
+
+## 1.18.2.2
+- Adds `cert_domain` as a UI configuration option
+
+## 1.18.2.1
+- Adds Tailscale TLS certificate generation support (contributed by @patlux)
+
+## 1.18.2.0
+- Tailscale package updated to version `1.18.2`
+
 ## 1.18.1.1
 - Adds `-advertise-tags` support (contributed by @peterkeen)
 
