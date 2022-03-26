@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.22.2.0
+- Tailscale package updated to version `1.22.2`
+
+## 1.22.1.0
+- Tailscale package updated to version `1.22.1`
+
+## 1.22.0.0
+- Tailscale package updated to version `1.22.0`
+
 ## 1.20.4.1
 - Adds `login_server` as a configuration option, enabling the use of 3rd party login servers like Headscale (contributed by @JensKuehnel)
 
