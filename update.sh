@@ -110,7 +110,7 @@ main() {
         local patches
         { readarray -t -d '' patches && wait "$!"; } < <(
           set -o pipefail
-          jq -j '.value.patches[] | (., "\u0000")' <<<"$upstream"
+          jq -j 'if (.value | has("patches")) then .value.patches[] | (., "\u0000") else "" end' <<<"$upstream"
         )
 
         check_repository "$name" "$repository" "$ref" "$prefix" "${patches[@]}"
