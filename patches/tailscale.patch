@@ -1,5 +1,5 @@
 diff --git DOCS.md DOCS.md
-index 3fba9f7..6160775 100644
+index 32492dc..508e18b 100644
 --- DOCS.md
 +++ DOCS.md
 @@ -6,7 +6,7 @@ Follow these steps to get the add-on installed on your system:
@@ -12,16 +12,22 @@ index 3fba9f7..6160775 100644
  5. Wait for the page to finish reloading, find the "Tailscale" add-on and click it. 
  6. Click on the "INSTALL" button.
 diff --git config.json config.json
-index 5555362..8e3163f 100644
+index 1c64220..8cc7fb8 100644
 --- config.json
 +++ config.json
-@@ -3,9 +3,9 @@
-     "version": "1.14.0.2",
+@@ -3,7 +3,7 @@
+     "version": "1.24.2.0",
      "slug": "tailscale",
      "description": "A zero config VPN",
 -    "url": "https://github.com/tsujamin/hass-addons/tree/main/tailscale",
 +    "url": "https://github.com/andrew-d/hass-addons/tree/main/tailscale",
-     "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+     "arch": [
+         "armhf",
+         "armv7",
+@@ -11,7 +11,7 @@
+         "amd64",
+         "i386"
+     ],
 -    "startup": "application",
 +    "startup": "services",
      "boot": "auto",
