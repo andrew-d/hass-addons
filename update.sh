@@ -2,6 +2,21 @@
 
 set -eu -o pipefail
 
+# Use correct shasum command
+if command -v sha256sum >/dev/null 2>&1 ; then
+    SHASUM=sha256sum
+elif command -v shasum >/dev/null 2>&1 ; then
+    SHASUM="shasum -a 256"
+else
+    echo "No sha256sum command" >&2
+    exit 1
+fi
+
+# Define realpath for macOS
+command -v realpath >/dev/null 2>&1 || realpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
 clean_branches() {
     local name="$1"
     local id="$2"
@@ -32,7 +47,7 @@ check_repository() {
     shift 4
 
     local id
-    id="$(echo "$name-$repository-$ref" | sha256sum | head -c 10)"
+    id="$(echo "$name-$repository-$ref" | $SHASUM | head -c 10)"
 
     local initialbranch
     initialbranch="$(git branch --show-current)"
@@ -110,7 +125,7 @@ main() {
         local patches
         { readarray -t -d '' patches && wait "$!"; } < <(
           set -o pipefail
-          jq -j '.value.patches[] | (., "\u0000")' <<<"$upstream"
+          jq -j 'if (.value | has("patches")) then .value.patches[] | (., "\u0000") else "" end' <<<"$upstream"
         )
 
         check_repository "$name" "$repository" "$ref" "$prefix" "${patches[@]}"
