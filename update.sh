@@ -2,6 +2,15 @@
 
 set -eu -o pipefail
 
+if command -v sha256sum >/dev/null 2>&1 ; then
+    SHASUM=sha256sum
+elif command -v shasum >/dev/null 2>&1 ; then
+    SHASUM="shasum -a 256"
+else
+    echo "No sha256sum command" >&2
+    exit 1
+fi
+
 clean_branches() {
     local name="$1"
     local id="$2"
@@ -32,7 +41,7 @@ check_repository() {
     shift 4
 
     local id
-    id="$(echo "$name-$repository-$ref" | sha256sum | head -c 10)"
+    id="$(echo "$name-$repository-$ref" | $SHASUM | head -c 10)"
 
     local initialbranch
     initialbranch="$(git branch --show-current)"
