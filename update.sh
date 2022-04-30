@@ -2,6 +2,7 @@
 
 set -eu -o pipefail
 
+# Use correct shasum command
 if command -v sha256sum >/dev/null 2>&1 ; then
     SHASUM=sha256sum
 elif command -v shasum >/dev/null 2>&1 ; then
@@ -10,6 +11,11 @@ else
     echo "No sha256sum command" >&2
     exit 1
 fi
+
+# Define realpath for macOS
+command -v realpath >/dev/null 2>&1 || realpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
 
 clean_branches() {
     local name="$1"
