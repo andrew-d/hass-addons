@@ -1,7 +1,7 @@
-diff --git DOCS.md DOCS.md
-index 32492dc..508e18b 100644
---- DOCS.md
-+++ DOCS.md
+diff --git tailscale/DOCS.md tailscale/DOCS.md
+index f84d7fe..ebc273f 100644
+--- tailscale/DOCS.md
++++ tailscale/DOCS.md
 @@ -6,7 +6,7 @@ Follow these steps to get the add-on installed on your system:
  
  1. Navigate in your Home Assistant frontend to **Supervisor** -> **Add-on Store**.
@@ -11,25 +11,19 @@ index 32492dc..508e18b 100644
  4. Click the "dot dot dot" icon in the top right corner again, and click the **Reload** button
  5. Wait for the page to finish reloading, find the "Tailscale" add-on and click it. 
  6. Click on the "INSTALL" button.
-diff --git config.json config.json
-index 1c64220..8cc7fb8 100644
---- config.json
-+++ config.json
-@@ -3,7 +3,7 @@
-     "version": "1.24.2.0",
-     "slug": "tailscale",
-     "description": "A zero config VPN",
--    "url": "https://github.com/tsujamin/hass-addons/tree/main/tailscale",
-+    "url": "https://github.com/andrew-d/hass-addons/tree/main/tailscale",
-     "arch": [
-         "armhf",
-         "armv7",
-@@ -11,7 +11,7 @@
-         "amd64",
-         "i386"
-     ],
--    "startup": "application",
-+    "startup": "services",
-     "boot": "auto",
-     "host_network": true,
-     "privileged": [
+diff --git tailscale/config.json tailscale/config.json
+index bc2ea5e..3f89f4f 100644
+--- tailscale/config.json
++++ tailscale/config.json
+@@ -3,9 +3,9 @@
+   "version": "1.32.2.0",
+   "slug": "tailscale",
+   "description": "A zero config VPN",
+-  "url": "https://github.com/tsujamin/hass-addons/tree/main/tailscale",
++  "url": "https://github.com/andrew-d/hass-addons/tree/main/tailscale",
+   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+-  "startup": "application",
++  "startup": "services",
+   "boot": "auto",
+   "host_network": true,
+   "privileged": ["NET_ADMIN"],
