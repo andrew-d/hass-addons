@@ -3,7 +3,7 @@
         "repository": "https://github.com/tsujamin/hass-addons",
         "prefix": "tailscale",
         "branch": "main",
-        "ref": "c7949581703a8fa1acd83ab74694b194c51e7a48",
+        "ref": "3795216e4b58faa18e8e3c304918337988c6dce3",
         "patches": [
             "patches/tailscale.patch"
         ]
