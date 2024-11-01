@@ -37,12 +37,25 @@ jobs:
 
       - name: Create Pull Request
         if: ${{ fromJSON(steps.check.outputs.update_available) }}
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@5e914681df9dc83aa4e4905692ca88beb2f9e91f # v7.0.5
         with:
           token: ${{secrets.GH_REPO_TOKEN}}
-          assignees: andrew-d
-          delete-branch: true
-          branch: auto-version-bump/bump
-          branch-suffix: timestamp
           base: main
           title: "Bump Versions"
+          assignees: andrew-d
+          branch: auto-version-bump/bump
+          # NOTE: no branch-suffix since we want to always update the same
+          # branch instead of creating new PRs for each run
+
+          # TODO: body should include what we updated
+
+          # When the action next runs it will delete the branch if there is no
+          # diff, which means:
+          #
+          #   1. If a pull request was merged and the branch is left undeleted,
+          #      when the action next runs it will delete the branch if there
+          #      is no further diff.
+          #   2. If a pull request is open, but there is now no longer a diff
+          #      and the PR is unnecessary, the action will delete the branch
+          #      causing the PR to close.
+          delete-branch: true
