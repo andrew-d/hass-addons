@@ -29,10 +29,12 @@ clean_branches() {
         fi
     done < <(git for-each-ref --format '%(refname:short)' refs/heads/)
 
-    for branch in "${remove[@]}"; do
-        echo "cleaning branch: $branch" >&2
-        git branch -q -D "$branch" >/dev/null 2>&1 || true
-    done
+    if [[ ${#remove[@]} -gt 0 ]]; then
+        for branch in "${remove[@]}"; do
+            echo "cleaning branch: $branch" >&2
+            git branch -q -D "$branch" >/dev/null 2>&1 || true
+        done
+    fi
 
     # Remove the remote (if any)
     local remote="$name-remote-$id"
@@ -119,16 +121,13 @@ main() {
         echo "Checking: $repository"
         #echo "  $ref"
 
-        # Get all patches that we're applying into a bash array; note that this
-        # means that patches can't have '|' characters in them, which seems
-        # fine.
-        local patches
-        { readarray -t -d '' patches && wait "$!"; } < <(
-          set -o pipefail
-          jq -j 'if (.value | has("patches")) then .value.patches[] | (., "\u0000") else "" end' <<<"$upstream"
-        )
+        # Get all patches that we're applying into a bash array
+        local patches=()
+        while IFS= read -r patch; do
+            [[ -n "$patch" ]] && patches+=("$patch")
+        done < <(jq -r 'if (.value | has("patches")) then .value.patches[] else empty end' <<<"$upstream")
 
-        check_repository "$name" "$repository" "$ref" "$prefix" "${patches[@]}"
+        check_repository "$name" "$repository" "$ref" "$prefix" ${patches[@]+"${patches[@]}"}
     done < <(jq -c '. | to_entries | .[]' upstreams.json)
 }
 
