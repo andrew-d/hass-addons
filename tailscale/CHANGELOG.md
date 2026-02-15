@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.94.2.0
+
+- Tailscale package updated to version `1.94.2`
+
+## 1.94.1.0
+
+- Tailscale package updated to version `1.94.1`
+
+## 1.92.5.0
+
+- Tailscale package updated to version `1.92.5`
+
+## 1.92.3.0
+
+- Tailscale package updated to version `1.92.3`
+
+## 1.92.1.0
+
+- Tailscale package updated to version `1.92.1`
+
 ## 1.90.9.0
 
 - Tailscale package updated to version `1.90.9`
@@ -344,7 +364,7 @@
 
 ## 1.26.2.1
 
-- Rolling back `1.26.2` update as binaries were removed from mirror
+- Rolling back `1.26.2` update as binaries were removed from the mirror
 
 ## 1.26.2.0
 
@@ -436,7 +456,7 @@
 
 ## 1.14.3.0
 
-- Tailsacle package updatesd to version `1.14.3`
+- Tailscale package updated to version `1.14.3`
 
 ## 1.14.0.2
 
