@@ -2,16 +2,16 @@ diff --git DOCS.md DOCS.md
 --- DOCS.md
 +++ DOCS.md
 @@ -2,7 +2,7 @@
-
+ 
  ## Quick Installation
-
+ 
 -1. Open this [My Home Assistant Redirect Link](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fhass-tailscale%2Fhass-addons)
 +1. Open this [My Home Assistant Redirect Link](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fandrew-d%2Fhass-addons)
  2. Enter your Home Assistant instance (if not already) and click "save."
  3. You will get a warning: "Open page in your Home Assistant? You've been linked to the page that will show the add app repository dialog with a specific repository URL pre-filled."`
  4. Click "Open Link," and you'll be taken to the add-on store with the repository URL pre-filled. Click "Add" to add the repository.
 @@ -15,7 +15,7 @@
-
+ 
  1. Navigate in your Home Assistant frontend to **Supervisor** -> **Add-on Store**.
  2. Click the "dot dot dot" icon in the top right corner, followed by the **Repositories** button.
 -3. Enter `https://github.com/hass-tailscale/hass-addons.git` as the new repository and click Add.
@@ -20,9 +20,9 @@ diff --git DOCS.md DOCS.md
  5. Wait for the page to finish reloading, find the "Tailscale" add-on, and click it.
  6. Click on the "Install" button.
 @@ -217,4 +217,4 @@
-
+ 
  ## Support
-
+ 
 -Got questions? Open an issue at <https://github.com/hass-tailscale/hass-addons/issues>
 +Got questions? Open an issue at <https://github.com/andrew-d/hass-addons/issues>
 diff --git config.json config.json
