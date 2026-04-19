@@ -22,7 +22,7 @@ clean_branches() {
     local id="$2"
 
     local branch
-    declare -a remove
+    declare -a remove=()
     while read -r branch; do
         if [[ "$branch" = "$name-$id-working"* ]]; then
             remove+=("$branch")
